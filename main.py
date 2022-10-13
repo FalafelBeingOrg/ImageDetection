@@ -30,11 +30,11 @@ while True:
 
     if len(classIds) != 0:
         for classId, confidence, box in zip(classIds.flatten(), confs.flatten(), bbox):
-            cv2.rectangle(img,box,color=(255,0,0),thickness = 3)
-            cv2.putText(img,classNames[classId-1].upper(),(box[0]+20, box[1]+60),
-                        cv2.FONT_HERSHEY_COMPLEX, 0.8, (255,0,0),3)
-            cv2.putText(img, str(math.floor(confidence * 1000)/10), (box[0] + 20, box[1] + 90),
-                        cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 0, 0), 3)
+            if classId-1 < len(classNames):
+                cv2.rectangle(img, box, color=(255, 0, 0), thickness=3)
+                cv2.putText(img,classNames[classId-1],(box[0]+20, box[1]+60),
+                            cv2.FONT_HERSHEY_COMPLEX, 0.8, (255,0,0),3)
+                cv2.putText(img, str(math.floor(confidence * 1000)/10), (box[0] + 20, box[1] + 90),
+                            cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 0, 0), 3)
     cv2.imshow("Output", img)
     cv2.waitKey(1)
-
